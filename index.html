@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>LearnCoach API Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: white;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 40px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .card {
+      background: #1e293b;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+
+    input,
+    select,
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: none;
+    }
+
+    button {
+      background: #3b82f6;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: #2563eb;
+    }
+
+    pre {
+      background: #020617;
+      padding: 15px;
+      border-radius: 10px;
+      overflow-x: auto;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    @media(max-width: 700px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>📚 LearnCoach API Demo</h1>
+
+    <div class="grid">
+
+      <!-- GENERATE PLAN -->
+      <div class="card">
+        <h2>Lernplan erstellen</h2>
+
+        <select id="subject">
+          <option>Mathe</option>
+          <option>Deutsch</option>
+          <option>Englisch</option>
+        </select>
+
+        <select id="level">
+          <option>Anfänger</option>
+          <option>Mittel</option>
+          <option>Fortgeschritten</option>
+        </select>
+
+        <input id="goal" placeholder="Ziel (z. B. Note 1)" />
+
+        <button onclick="generatePlan()">Plan generieren</button>
+      </div>
+
+      <!-- ANALYZE -->
+      <div class="card">
+        <h2>Fortschritt analysieren</h2>
+
+        <input id="scores" placeholder="Scores z. B. 60,70,80" />
+
+        <button onclick="analyze()">Analysieren</button>
+      </div>
+
+    </div>
+
+    <!-- RECOMMEND -->
+    <div class="card">
+      <h2>Empfehlung</h2>
+
+      <input id="weakTopics" placeholder="Schwächen z. B. Algebra,Grammatik" />
+
+      <button onclick="recommend()">Empfehlen</button>
+    </div>
+
+    <!-- OUTPUT -->
+    <div class="card">
+      <h2>Antwort</h2>
+      <pre id="output">Hier erscheint die API Antwort...</pre>
+    </div>
+
+  </div>
+
+  <script>
+    const output = document.getElementById("output");
+
+    function show(data) {
+      output.innerText = JSON.stringify(data, null, 2);
+    }
+
+    async function generatePlan() {
+      const subject = document.getElementById("subject").value;
+      const level = document.getElementById("level").value;
+      const goal = document.getElementById("goal").value;
+
+      const res = await fetch('/api/generate-plan', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ subject, level, goal })
+      });
+
+      show(await res.json());
+    }
+
+    async function analyze() {
+      const scoresInput = document.getElementById("scores").value;
+      const scores = scoresInput.split(",").map(Number);
+
+      const res = await fetch('/api/analyze-progress', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ scores })
+      });
+
+      show(await res.json());
+    }
+
+    async function recommend() {
+      const weakTopicsInput = document.getElementById("weakTopics").value;
+      const weakTopics = weakTopicsInput.split(",");
+
+      const res = await fetch('/api/recommend-topic', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ weakTopics })
+      });
+
+      show(await res.json());
+    }
+  </script>
+</body>
+
+</html>
