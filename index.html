@@ -504,6 +504,408 @@
         .function { color: #60a5fa; }
         .number { color: #34d399; }
 
+        /* Visual UI Mode Styles */
+        .view-toggle {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .toggle-btn {
+            padding: 0.5rem 1rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-glass);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .toggle-btn.active {
+            background: var(--accent-primary);
+            color: white;
+            border-color: var(--accent-primary);
+        }
+
+        /* Visual Cards */
+        .visual-container {
+            display: none;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .visual-container.active {
+            display: block;
+        }
+
+        .plan-card {
+            background: var(--gradient-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .plan-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .plan-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .plan-meta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .meta-value {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .day-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-glass);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .day-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .day-number {
+            font-weight: 600;
+            color: var(--accent-primary);
+        }
+
+        .day-date {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .session-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .session-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.5rem;
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 8px;
+            font-size: 0.875rem;
+        }
+
+        .session-time {
+            font-weight: 600;
+            color: var(--accent-primary);
+            min-width: 50px;
+        }
+
+        .session-topic {
+            flex: 1;
+        }
+
+        .session-subject {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            background: var(--bg-secondary);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .complexity-badge {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .complexity-low { background: rgba(34, 197, 94, 0.2); color: #22c55e; }
+        .complexity-medium { background: rgba(234, 179, 8, 0.2); color: #eab308; }
+        .complexity-high { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+
+        /* User Profile Visual */
+        .profile-card {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 1.5rem;
+            align-items: start;
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        .profile-info h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .stat-box {
+            text-align: center;
+            padding: 0.75rem;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+        }
+
+        .stat-box-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+        }
+
+        .stat-box-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        /* Topic Cards */
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .topic-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-glass);
+            border-radius: 12px;
+            padding: 1rem;
+            transition: all 0.3s;
+        }
+
+        .topic-card:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-2px);
+        }
+
+        .topic-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .topic-meta {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            font-size: 0.75rem;
+        }
+
+        /* Quiz Visual */
+        .quiz-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-glass);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .quiz-question {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .quiz-option {
+            padding: 0.75rem 1rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-glass);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .quiz-option:hover {
+            background: rgba(99, 102, 241, 0.1);
+            border-color: var(--accent-primary);
+        }
+
+        /* Progress Visual */
+        .xp-bar {
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            height: 8px;
+            overflow: hidden;
+            margin: 0.5rem 0;
+        }
+
+        .xp-fill {
+            background: var(--gradient-primary);
+            height: 100%;
+            border-radius: 8px;
+            transition: width 0.5s ease;
+        }
+
+        .achievement-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 1rem;
+        }
+
+        .achievement-item {
+            text-align: center;
+            padding: 1rem;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-glass);
+            border-radius: 12px;
+        }
+
+        .achievement-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .achievement-name {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        /* Coach Tips */
+        .tip-card {
+            background: var(--gradient-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            gap: 1rem;
+            align-items: start;
+        }
+
+        .tip-icon {
+            font-size: 1.5rem;
+        }
+
+        .tip-content {
+            flex: 1;
+        }
+
+        .action-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            background: var(--bg-primary);
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+
+        .priority-high { border-left: 3px solid #ef4444; }
+        .priority-medium { border-left: 3px solid #eab308; }
+        .priority-low { border-left: 3px solid #22c55e; }
+
+        /* Export Buttons */
+        .export-bar {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-export {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-glass);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-export:hover {
+            background: var(--accent-primary);
+            border-color: var(--accent-primary);
+        }
+
+        .btn-export.google {
+            background: rgba(234, 67, 53, 0.1);
+            border-color: rgba(234, 67, 53, 0.3);
+        }
+
+        .btn-export.google:hover {
+            background: #ea4335;
+        }
+
+        .btn-export.ical {
+            background: rgba(99, 102, 241, 0.1);
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-export.ical:hover {
+            background: var(--accent-primary);
+        }
+
+        /* Success Message */
+        .success-message {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         /* Footer */
         footer {
             border-top: 1px solid var(--border-glass);
@@ -674,19 +1076,72 @@
 
             <div class="request-builder">
                 <div class="builder-panel">
-                    <div class="panel-title">Request Configuration</div>
-                    <div id="form-container"></div>
-                    <button class="btn-primary" onclick="sendRequest()">Send Request</button>
+                </div>
+            </section>
+
+            <section id="tester" class="tester-section">
+                <div class="tester-header">
+                    <h3 class="tester-title">🔧 Interactive API Tester</h3>
                 </div>
 
-                <div class="builder-panel response-panel">
-                    <div class="panel-title">Response</div>
-                    <div class="response-output" id="response-output">Click "Send Request" to see the response...</div>
+                <div class="endpoint-selector">
+                    <button class="endpoint-btn active" onclick="selectEndpoint('generate-plan')">Generate Plan</button>
+                    <button class="endpoint-btn" onclick="selectEndpoint('user-profile')">User Profile</button>
+                    <button class="endpoint-btn" onclick="selectEndpoint('knowledge-topics')">Knowledge Topics</button>
+                    <button class="endpoint-btn" onclick="selectEndpoint('quiz-generate')">Generate Quiz</button>
+                    <button class="endpoint-btn" onclick="selectEndpoint('progress-log')">Log Session</button>
+                    <button class="endpoint-btn" onclick="selectEndpoint('coach-tip')">Daily Tip</button>
                 </div>
-            </div>
-        </section>
 
-        <section id="docs" class="code-section">
+                <div class="request-builder">
+                    <div class="builder-panel">
+                        <div class="panel-title">Request Configuration</div>
+                        <div id="form-container"></div>
+                        <button class="btn-primary" onclick="sendRequest()">Send Request</button>
+                    </div>
+
+                    <div class="builder-panel response-panel">
+                        <div class="panel-title">Response</div>
+                        
+                        <!-- View Toggle -->
+                        <div class="view-toggle">
+                            <button class="toggle-btn active" onclick="toggleView('json')">📄 JSON</button>
+                            <button class="toggle-btn" onclick="toggleView('visual')">🎨 Visual</button>
+                        </div>
+
+                        <!-- Success Message -->
+                        <div class="success-message" id="success-message">
+                            ✅ Erfolgreich zu Google Calendar exportiert!
+                        </div>
+
+                        <!-- Export Buttons (shown for plan) -->
+                        <div class="export-bar" id="export-bar" style="display: none;">
+                            <button class="btn-export google" onclick="exportToGoogleCalendar()">
+                                📅 Google Calendar
+                            </button>
+                            <button class="btn-export ical" onclick="exportToICal()">
+                                📋 iCal Export
+                            </button>
+                        </div>
+
+                        <!-- JSON View -->
+                        <div class="response-output" id="response-output">Click "Send Request" to see the response...</div>
+                        
+                        <!-- Visual View -->
+                        <div class="visual-container" id="visual-container"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="docs" class="code-section">
+                <h2 class="section-title">Quick Start</h2>
+                <div class="code-tabs">
+                    <button class="code-tab active" onclick="showCode('curl')">cURL</button>
+                    <button class="code-tab" onclick="showCode('javascript')">JavaScript</button>
+                    <button class="code-tab" onclick="showCode('python')">Python</button>
+                </div>
+                <div class="code-block" id="code-block">
+                    <pre><code id="code-content"><span class="comment"># Generate a smart learning plan</span>
             <h2 class="section-title">Quick Start</h2>
             <div class="code-tabs">
                 <button class="code-tab active" onclick="showCode('curl')">cURL</button>
@@ -1043,6 +1498,450 @@ curl -X POST https://api.learncoach.com/api/planner/generate \\
             };
             
             codeContent.innerHTML = examples[lang];
+        }
+
+        // Visual View and Export Functions
+        let currentResponseData = null;
+        let currentView = 'json';
+
+        function toggleView(view) {
+            currentView = view;
+            document.querySelectorAll('.toggle-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            const jsonOutput = document.getElementById('response-output');
+            const visualContainer = document.getElementById('visual-container');
+            const exportBar = document.getElementById('export-bar');
+            
+            if (view === 'json') {
+                jsonOutput.style.display = 'block';
+                visualContainer.classList.remove('active');
+            } else {
+                jsonOutput.style.display = 'none';
+                visualContainer.classList.add('active');
+                if (currentResponseData) {
+                    renderVisual(currentResponseData);
+                }
+            }
+            
+            // Show export bar only for learning plans
+            if (currentEndpoint === 'generate-plan' && currentResponseData?.plan) {
+                exportBar.style.display = 'flex';
+            } else {
+                exportBar.style.display = 'none';
+            }
+        }
+
+        function renderVisual(data) {
+            const container = document.getElementById('visual-container');
+            
+            switch (currentEndpoint) {
+                case 'generate-plan':
+                    container.innerHTML = renderLearningPlan(data);
+                    break;
+                case 'user-profile':
+                    container.innerHTML = renderUserProfile(data);
+                    break;
+                case 'knowledge-topics':
+                    container.innerHTML = renderTopics(data);
+                    break;
+                case 'quiz-generate':
+                    container.innerHTML = renderQuiz(data);
+                    break;
+                case 'progress-log':
+                    container.innerHTML = renderProgress(data);
+                    break;
+                case 'coach-tip':
+                    container.innerHTML = renderCoachTip(data);
+                    break;
+                default:
+                    container.innerHTML = '<div class="plan-card"><p>Visual view not available for this endpoint</p></div>';
+            }
+        }
+
+        function renderLearningPlan(data) {
+            if (!data.plan) return '<div class="plan-card"><p>Kein Plan verfügbar</p></div>';
+            
+            const plan = data.plan;
+            let html = `
+                <div class="plan-card">
+                    <div class="plan-header">
+                        <div class="plan-title">📚 Dein Lernplan</div>
+                    </div>
+                    <div class="plan-meta">
+                        <div class="meta-item">📅 <span class="meta-value">${plan.totalDays} Tage</span></div>
+                        <div class="meta-item">⏱️ <span class="meta-value">${plan.totalHours} Stunden</span></div>
+                        <div class="meta-item">📖 <span class="meta-value">${plan.totalTopics} Themen</span></div>
+                        <div class="meta-item">🎯 <span class="meta-value">Note ${plan.targetNote}</span></div>
+                        <div class="meta-item">📊 <span class="meta-value">${plan.metadata?.estimatedSuccessRate || 75}% Erfolgswahrscheinlichkeit</span></div>
+                    </div>
+                </div>
+            `;
+            
+            // Show first 5 days
+            const daysToShow = plan.schedule?.slice(0, 5) || [];
+            daysToShow.forEach(day => {
+                html += `
+                    <div class="day-card">
+                        <div class="day-header">
+                            <span class="day-number">Tag ${day.day}</span>
+                            <span class="day-date">${day.date}</span>
+                        </div>
+                        <div class="session-list">
+                            ${day.sessions?.map(session => `
+                                <div class="session-item">
+                                    <span class="session-time">${session.duration}h</span>
+                                    <span class="session-topic">${session.topicName}</span>
+                                    <span class="session-subject">${session.subject}</span>
+                                    <span class="complexity-badge complexity-${session.complexity <= 4 ? 'low' : session.complexity <= 7 ? 'medium' : 'high'}">
+                                        ${session.complexity}/10
+                                    </span>
+                                </div>
+                            `).join('') || '<p>Keine Sessions</p>'}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            if (plan.schedule?.length > 5) {
+                html += `<div class="day-card" style="text-align: center; color: var(--text-secondary);">
+                    ... und ${plan.schedule.length - 5} weitere Tage
+                </div>`;
+            }
+            
+            return html;
+        }
+
+        function renderUserProfile(data) {
+            const user = data.user;
+            const stats = data.stats;
+            
+            return `
+                <div class="plan-card">
+                    <div class="profile-card">
+                        <div class="profile-avatar">👤</div>
+                        <div class="profile-info">
+                            <h3>${user?.name || 'Benutzer'}</h3>
+                            <p style="color: var(--text-secondary);">Klasse ${user?.grade || '-'} • Level ${user?.level || 1}</p>
+                            <div class="profile-stats">
+                                <div class="stat-box">
+                                    <div class="stat-box-value">${user?.totalXP || 0}</div>
+                                    <div class="stat-box-label">XP</div>
+                                </div>
+                                <div class="stat-box">
+                                    <div class="stat-box-value">${user?.streak || 0}</div>
+                                    <div class="stat-box-label">🔥 Streak</div>
+                                </div>
+                                <div class="stat-box">
+                                    <div class="stat-box-value">${stats?.topicsCompleted || 0}</div>
+                                    <div class="stat-box-label">Themen</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="day-card">
+                    <h4 style="margin-bottom: 1rem;">🎯 Fächer</h4>
+                    <div class="topic-meta">
+                        ${user?.subjects?.map(s => `<span class="session-subject">${s}</span>`).join(' ') || '-'}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderTopics(data) {
+            const topics = data.topics || [];
+            
+            return `
+                <div class="plan-card">
+                    <div class="plan-title">📚 ${data.total || topics.length} Themen gefunden</div>
+                </div>
+                <div class="topic-grid">
+                    ${topics.slice(0, 6).map(topic => `
+                        <div class="topic-card">
+                            <div class="topic-name">${topic.name}</div>
+                            <div class="topic-meta">
+                                <span class="session-subject">${topic.subject}</span>
+                                <span class="complexity-badge complexity-${topic.complexity <= 4 ? 'low' : topic.complexity <= 7 ? 'medium' : 'high'}">
+                                    ${topic.complexity}/10
+                                </span>
+                                <span style="color: var(--text-secondary);">⏱️ ${topic.estimatedHours}h</span>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function renderQuiz(data) {
+            const quiz = data.quiz;
+            
+            return `
+                <div class="plan-card">
+                    <div class="plan-title">❓ Quiz: ${quiz?.totalQuestions || 0} Fragen</div>
+                    <div class="plan-meta">
+                        <div class="meta-item">⏱️ <span class="meta-value">${quiz?.timeLimit || 10} Minuten</span></div>
+                        <div class="meta-item">🏆 <span class="meta-value">${quiz?.totalPoints || 0} Punkte</span></div>
+                    </div>
+                </div>
+                ${quiz?.questions?.map((q, idx) => `
+                    <div class="quiz-card">
+                        <div class="quiz-question">${idx + 1}. ${q.question}</div>
+                        <div class="quiz-options">
+                            ${q.options?.map((opt, i) => `
+                                <div class="quiz-option">${String.fromCharCode(65 + i)}) ${opt}</div>
+                            `).join('') || ''}
+                        </div>
+                    </div>
+                `).join('') || '<p>Keine Fragen verfügbar</p>'}
+            `;
+        }
+
+        function renderProgress(data) {
+            const xp = data.xp;
+            
+            return `
+                <div class="plan-card">
+                    <div class="plan-title">🎉 Session abgeschlossen!</div>
+                    <div style="text-align: center; padding: 1rem;">
+                        <div style="font-size: 3rem; margin-bottom: 0.5rem;">✨</div>
+                        <div style="font-size: 1.5rem; font-weight: 700; color: var(--accent-primary);">+${xp?.earned || 0} XP</div>
+                        <p style="color: var(--text-secondary);">${data.message || ''}</p>
+                    </div>
+                    <div class="xp-bar">
+                        <div class="xp-fill" style="width: ${((xp?.newTotal % 300) / 3)}%"></div>
+                    </div>
+                    <p style="text-align: center; font-size: 0.875rem; color: var(--text-secondary);">
+                        Level ${xp?.newLevel || 1} • ${300 - (xp?.newTotal % 300)} XP bis Level ${(xp?.newLevel || 1) + 1}
+                    </p>
+                </div>
+                <div class="day-card">
+                    <h4>🔥 Streak: ${data.streak || 0} Tage</h4>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem;">Weiter so! Morgen schon Level ${xp?.newLevel || 1}?</p>
+                </div>
+            `;
+        }
+
+        function renderCoachTip(data) {
+            const tip = data.tip;
+            
+            return `
+                <div class="plan-card">
+                    <div class="plan-title">🤖 Dein Lern-Coach für heute</div>
+                    <p style="color: var(--text-secondary);">${tip?.date || new Date().toISOString().split('T')[0]}</p>
+                </div>
+                ${tip?.tips?.map(t => `
+                    <div class="tip-card">
+                        <span class="tip-icon">${t.split(' ')[0]}</span>
+                        <div class="tip-content">${t.substring(2)}</div>
+                    </div>
+                `).join('') || ''}
+                ${tip?.actionItems?.length ? `
+                    <div class="day-card">
+                        <h4 style="margin-bottom: 1rem;">📋 Action Items</h4>
+                        ${tip.actionItems.map(item => `
+                            <div class="action-item priority-${item.priority}">
+                                <span>${item.priority === 'high' ? '🔴' : item.priority === 'medium' ? '🟡' : '🟢'}</span>
+                                <div>
+                                    <div>${item.message}</div>
+                                    <small style="color: var(--text-secondary);">${item.action}</small>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                ` : ''}
+            `;
+        }
+
+        // Override sendRequest to store data
+        const originalSendRequest = sendRequest;
+        sendRequest = async function() {
+            const config = endpoints[currentEndpoint];
+            const output = document.getElementById('response-output');
+            const visualContainer = document.getElementById('visual-container');
+            const exportBar = document.getElementById('export-bar');
+            
+            output.textContent = 'Loading...';
+            
+            try {
+                let url = config.path;
+                
+                if (config.method === 'GET' && config.params) {
+                    const params = new URLSearchParams(config.params);
+                    url += '?' + params.toString();
+                }
+                
+                const options = {
+                    method: config.method,
+                    headers: { 'Content-Type': 'application/json' }
+                };
+                
+                if (config.method === 'POST') {
+                    const bodyText = document.getElementById('request-body')?.value;
+                    if (bodyText) {
+                        options.body = bodyText;
+                    }
+                }
+                
+                const response = await fetch(url, options);
+                const data = await response.json();
+                
+                currentResponseData = data;
+                output.textContent = JSON.stringify(data, null, 2);
+                
+                // If in visual mode, render it
+                if (currentView === 'visual') {
+                    renderVisual(data);
+                }
+                
+                // Show export bar for learning plans
+                if (currentEndpoint === 'generate-plan' && data.plan) {
+                    exportBar.style.display = 'flex';
+                } else {
+                    exportBar.style.display = 'none';
+                }
+                
+            } catch (error) {
+                const mockResponse = generateMockResponse(currentEndpoint);
+                currentResponseData = mockResponse;
+                output.textContent = JSON.stringify(mockResponse, null, 2);
+                
+                if (currentView === 'visual') {
+                    renderVisual(mockResponse);
+                }
+                
+                if (currentEndpoint === 'generate-plan' && mockResponse.plan) {
+                    exportBar.style.display = 'flex';
+                } else {
+                    exportBar.style.display = 'none';
+                }
+            }
+        };
+
+        // Google Calendar Export
+        function exportToGoogleCalendar() {
+            if (!currentResponseData?.plan?.schedule) {
+                alert('Kein Lernplan zum Exportieren vorhanden!');
+                return;
+            }
+            
+            const plan = currentResponseData.plan;
+            const events = [];
+            
+            plan.schedule.forEach(day => {
+                const date = new Date(day.date);
+                let currentHour = 9; // Start at 9 AM
+                
+                day.sessions?.forEach(session => {
+                    const startTime = new Date(date);
+                    startTime.setHours(currentHour, 0, 0);
+                    
+                    const endTime = new Date(startTime);
+                    endTime.setHours(startTime.getHours() + Math.floor(session.duration));
+                    endTime.setMinutes((session.duration % 1) * 60);
+                    
+                    events.push({
+                        title: `📚 ${session.topicName}`,
+                        description: `Fach: ${session.subject}\\nKomplexität: ${session.complexity}/10\\nTyp: ${session.type}\\n\\nErstellt mit LearnCoach API`,
+                        start: startTime,
+                        end: endTime
+                    });
+                    
+                    currentHour += session.duration;
+                });
+            });
+            
+            // Create Google Calendar URLs (max 5 events at once due to URL length)
+            events.slice(0, 5).forEach(event => {
+                const url = createGoogleCalendarUrl(event);
+                window.open(url, '_blank');
+            });
+            
+            // Show success message
+            const successMsg = document.getElementById('success-message');
+            successMsg.classList.add('show');
+            setTimeout(() => successMsg.classList.remove('show'), 3000);
+        }
+
+        function createGoogleCalendarUrl(event) {
+            const formatDate = (date) => {
+                return date.toISOString().replace(/-|:|\.\d{3}/g, '');
+            };
+            
+            const params = new URLSearchParams({
+                action: 'TEMPLATE',
+                text: event.title,
+                dates: `${formatDate(event.start)}/${formatDate(event.end)}`,
+                details: event.description,
+                location: 'Lernen',
+                sf: 'true',
+                output: 'xml'
+            });
+            
+            return `https://calendar.google.com/calendar/render?${params.toString()}`;
+        }
+
+        // iCal Export
+        function exportToICal() {
+            if (!currentResponseData?.plan?.schedule) {
+                alert('Kein Lernplan zum Exportieren vorhanden!');
+                return;
+            }
+            
+            const plan = currentResponseData.plan;
+            let icalContent = 'BEGIN:VCALENDAR\\nVERSION:2.0\\nPRODID:-//LearnCoach API//DE\\nCALSCALE:GREGORIAN\\nMETHOD:PUBLISH\\n';
+            
+            plan.schedule.forEach(day => {
+                const date = new Date(day.date);
+                let currentHour = 9;
+                
+                day.sessions?.forEach(session => {
+                    const startTime = new Date(date);
+                    startTime.setHours(currentHour, 0, 0);
+                    
+                    const endTime = new Date(startTime);
+                    endTime.setHours(startTime.getHours() + Math.floor(session.duration));
+                    endTime.setMinutes((session.duration % 1) * 60);
+                    
+                    const formatICalDate = (date) => {
+                        return date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+                    };
+                    
+                    const uid = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}@learncoach`;
+                    
+                    icalContent += `BEGIN:VEVENT\\n`;
+                    icalContent += `UID:${uid}\\n`;
+                    icalContent += `DTSTART:${formatICalDate(startTime)}\\n`;
+                    icalContent += `DTEND:${formatICalDate(endTime)}\\n`;
+                    icalContent += `SUMMARY:${session.topicName}\\n`;
+                    icalContent += `DESCRIPTION:Fach: ${session.subject} | Komplexität: ${session.complexity}/10\\n`;
+                    icalContent += `CATEGORIES:Lernen,${session.subject}\\n`;
+                    icalContent += `STATUS:CONFIRMED\\n`;
+                    icalContent += `END:VEVENT\\n`;
+                    
+                    currentHour += session.duration;
+                });
+            });
+            
+            icalContent += 'END:VCALENDAR';
+            
+            // Download file
+            const blob = new Blob([icalContent], { type: 'text/calendar;charset=utf-8' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = `learncoach-plan-${new Date().toISOString().split('T')[0]}.ics`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            // Show success message
+            const successMsg = document.getElementById('success-message');
+            successMsg.textContent = '✅ iCal-Datei heruntergeladen!';
+            successMsg.classList.add('show');
+            setTimeout(() => {
+                successMsg.classList.remove('show');
+                successMsg.textContent = '✅ Erfolgreich zu Google Calendar exportiert!';
+            }, 3000);
         }
 
         // Initialize
