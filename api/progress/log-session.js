@@ -101,8 +101,9 @@ function logSession(req, res) {
   }
 
   // Calculate XP
+  const user = mockDB.getUser(userId);
   const baseXP = Math.floor(duration * 0.8);
-  const streakBonus = Math.min(50, userId.streak * 2);
+  const streakBonus = user ? Math.min(50, user.streak * 2) : 0;
   const totalXP = baseXP + streakBonus;
 
   const session = {
@@ -123,17 +124,16 @@ function logSession(req, res) {
 
   // Check for achievements
   const newAchievements = [];
-  const user = mockDB.getUser(userId);
   
-  if (user.streak === 7) {
+  if (user && user.streak === 7) {
     const unlocked = mockDB.unlockAchievement(userId, 'streak_7');
     if (unlocked) newAchievements.push(unlocked);
   }
-  if (user.streak === 14) {
+  if (user && user.streak === 14) {
     const unlocked = mockDB.unlockAchievement(userId, 'streak_14');
     if (unlocked) newAchievements.push(unlocked);
   }
-  if (user.totalXP >= 1000 && user.totalXP - totalXP < 1000) {
+  if (user && user.totalXP >= 1000 && user.totalXP - totalXP < 1000) {
     const unlocked = mockDB.unlockAchievement(userId, 'xp_1000');
     if (unlocked) newAchievements.push(unlocked);
   }
@@ -151,7 +151,7 @@ function logSession(req, res) {
       newLevel: xpUpdate.newLevel,
       leveledUp: xpUpdate.leveledUp
     },
-    streak: user.streak,
+    streak: user ? user.streak : 0,
     achievements: newAchievements,
     message: `Session logged! +${totalXP} XP${newAchievements.length > 0 ? ' and new achievements!' : ''}`
   });

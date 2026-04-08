@@ -240,7 +240,7 @@ function generateFeedback(duration, performance, difficulty, topic) {
   }
 
   if (duration >= 45) {
-    feedback += " Längere Sessions zeigen deine Konzernationsfähigkeit.";
+    feedback += " Längere Sessions zeigen deine Konzentrationsfähigkeit.";
   }
 
   return feedback;
@@ -263,8 +263,10 @@ function formatNextSteps(duration, topic) {
 function generateActionItems(user, progress) {
   const items = [];
 
-  // Check if daily goal met
-  const todayMinutes = progress?.weeklyStats?.[6]?.minutes || 0;
+  // Check if daily goal met - find today by date instead of hardcoded index
+  const todayStr = new Date().toISOString().split('T')[0];
+  const todayStats = progress?.weeklyStats?.find(day => day.date === todayStr);
+  const todayMinutes = todayStats?.minutes || 0;
   if (todayMinutes < user.dailyGoalMinutes) {
     items.push({
       type: 'goal',
@@ -285,7 +287,7 @@ function generateActionItems(user, progress) {
   }
 
   // Suggest quiz if topics completed
-  if (user.completedTopics.length > 0 && user.completedTopics.length % 5 === 0) {
+  if (user.completedTopics?.length > 0 && user.completedTopics.length % 5 === 0) {
     items.push({
       type: 'quiz',
       priority: 'low',

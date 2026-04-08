@@ -66,7 +66,7 @@ function getProfile(req, res) {
       totalTopicsInDB: allTopics,
       topicsInCurrentGrade: userGradeTopics.length,
       topicsCompleted: user.completedTopics.length,
-      completionRate: Math.round((completedInGrade / userGradeTopics.length) * 100),
+      completionRate: userGradeTopics.length > 0 ? Math.round((completedInGrade / userGradeTopics.length) * 100) : 0,
       skillLevels: user.skillLevels,
       weakTopicsCount: user.weakTopics.length,
       strongTopicsCount: user.strongTopics.length
