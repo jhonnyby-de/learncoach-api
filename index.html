@@ -134,15 +134,99 @@
         <section id="tester" class="tester-section">
             <div class="tester-header">
                 <h3 class="tester-title">🔧 Interactive API Tester</h3>
+                <div id="auth-status" class="auth-status-bar">
+                    <span class="auth-indicator">🔴 Not Authenticated</span>
+                    <button class="btn-small" onclick="showAuthModal()">Login / Register</button>
+                </div>
             </div>
 
-            <div class="endpoint-selector">
-                <button class="endpoint-btn active" onclick="selectEndpoint('generate-plan')">Generate Plan</button>
-                <button class="endpoint-btn" onclick="selectEndpoint('user-profile')">User Profile</button>
-                <button class="endpoint-btn" onclick="selectEndpoint('knowledge-topics')">Knowledge Topics</button>
-                <button class="endpoint-btn" onclick="selectEndpoint('quiz-generate')">Generate Quiz</button>
-                <button class="endpoint-btn" onclick="selectEndpoint('progress-log')">Log Session</button>
-                <button class="endpoint-btn" onclick="selectEndpoint('coach-tip')">Daily Tip</button>
+            <div class="endpoint-categories">
+                <!-- Authentication -->
+                <div class="endpoint-category">
+                    <div class="category-header" onclick="toggleCategory('auth')">
+                        <span class="category-icon">🔐</span>
+                        <span>Authentication</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="endpoint-selector" id="category-auth">
+                        <button class="endpoint-btn active" onclick="selectEndpoint('auth-register')">Register</button>
+                        <button class="endpoint-btn" onclick="selectEndpoint('auth-login')">Login</button>
+                        <button class="endpoint-btn" onclick="selectEndpoint('auth-me')">My Profile</button>
+                        <button class="endpoint-btn" onclick="selectEndpoint('auth-apikey')">Generate API Key</button>
+                        <button class="endpoint-btn" onclick="selectEndpoint('auth-logout')">Logout</button>
+                    </div>
+                </div>
+
+                <!-- Learning Plans -->
+                <div class="endpoint-category">
+                    <div class="category-header" onclick="toggleCategory('planner')">
+                        <span class="category-icon">📚</span>
+                        <span>Learning Plans</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="endpoint-selector" id="category-planner">
+                        <button class="endpoint-btn" onclick="selectEndpoint('planner-generate')">Generate Plan</button>
+                        <button class="endpoint-btn" onclick="selectEndpoint('planner-list')">My Plans</button>
+                        <button class="endpoint-btn" onclick="selectEndpoint('planner-complete')">Complete Session</button>
+                        <button class="endpoint-btn" onclick="selectEndpoint('generate-plan')">Legacy: Generate Plan</button>
+                    </div>
+                </div>
+
+                <!-- Quiz -->
+                <div class="endpoint-category">
+                    <div class="category-header" onclick="toggleCategory('quiz')">
+                        <span class="category-icon">❓</span>
+                        <span>Quiz</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="endpoint-selector" id="category-quiz">
+                        <button class="endpoint-btn" onclick="selectEndpoint('quiz-generate')">Generate Quiz</button>
+                        <button class="endpoint-btn" onclick="selectEndpoint('quiz-submit')">Submit Answers</button>
+                        <button class="endpoint-btn" onclick="selectEndpoint('quiz-history')">Quiz History</button>
+                    </div>
+                </div>
+
+                <!-- Progress -->
+                <div class="endpoint-category">
+                    <div class="category-header" onclick="toggleCategory('progress')">
+                        <span class="category-icon">📈</span>
+                        <span>Progress</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="endpoint-selector" id="category-progress">
+                        <button class="endpoint-btn" onclick="selectEndpoint('progress-log')">Log Session</button>
+                        <button class="endpoint-btn" onclick="selectEndpoint('progress-sessions')">My Sessions</button>
+                        <button class="endpoint-btn" onclick="selectEndpoint('progress-stats')">Statistics</button>
+                        <button class="endpoint-btn" onclick="selectEndpoint('progress-dashboard')">Dashboard</button>
+                    </div>
+                </div>
+
+                <!-- Knowledge -->
+                <div class="endpoint-category">
+                    <div class="category-header" onclick="toggleCategory('knowledge')">
+                        <span class="category-icon">🧠</span>
+                        <span>Knowledge</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="endpoint-selector" id="category-knowledge">
+                        <button class="endpoint-btn" onclick="selectEndpoint('knowledge-topics')">Browse Topics</button>
+                        <button class="endpoint-btn" onclick="selectEndpoint('knowledge-subjects')">Subjects</button>
+                        <button class="endpoint-btn" onclick="selectEndpoint('knowledge-stats')">Statistics</button>
+                    </div>
+                </div>
+
+                <!-- Legacy -->
+                <div class="endpoint-category collapsed">
+                    <div class="category-header" onclick="toggleCategory('legacy')">
+                        <span class="category-icon">📦</span>
+                        <span>Legacy Endpoints</span>
+                        <span class="toggle-icon">▶</span>
+                    </div>
+                    <div class="endpoint-selector collapsed" id="category-legacy">
+                        <button class="endpoint-btn" onclick="selectEndpoint('user-profile')">User Profile (Old)</button>
+                        <button class="endpoint-btn" onclick="selectEndpoint('coach-tip')">Daily Tip (Old)</button>
+                    </div>
+                </div>
             </div>
 
             <div class="request-builder">

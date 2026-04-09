@@ -851,3 +851,265 @@ footer {
 .footer-links a:hover {
     color: var(--accent-primary);
 }
+
+/* ============================================
+   NEW: Endpoint Categories & Auth UI
+   ============================================ */
+
+/* Auth Status Bar */
+.auth-status-bar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem 1rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-glass);
+    border-radius: 12px;
+}
+
+.auth-indicator {
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.auth-indicator.authenticated {
+    color: #22c55e;
+}
+
+.btn-small {
+    padding: 0.375rem 0.75rem;
+    background: var(--accent-primary);
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-small:hover {
+    background: var(--accent-secondary);
+}
+
+/* Endpoint Categories */
+.endpoint-categories {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.endpoint-category {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-glass);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.endpoint-category.collapsed .endpoint-selector {
+    display: none;
+}
+
+.endpoint-category.collapsed .toggle-icon {
+    transform: rotate(-90deg);
+}
+
+.category-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.875rem 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+    font-weight: 500;
+}
+
+.category-header:hover {
+    background: rgba(99, 102, 241, 0.1);
+}
+
+.category-icon {
+    font-size: 1.25rem;
+}
+
+.toggle-icon {
+    margin-left: auto;
+    transition: transform 0.3s;
+    font-size: 0.75rem;
+}
+
+.endpoint-category .endpoint-selector {
+    padding: 0.75rem;
+    border-top: 1px solid var(--border-glass);
+    background: rgba(15, 15, 26, 0.5);
+}
+
+/* Endpoint Info & Badges */
+.endpoint-info {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-glass);
+}
+
+.endpoint-badges {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.5rem;
+}
+
+.category-badge {
+    padding: 0.25rem 0.5rem;
+    background: var(--gradient-glass);
+    border: 1px solid var(--accent-primary);
+    border-radius: 4px;
+    font-size: 0.75rem;
+    color: var(--accent-primary);
+    font-weight: 500;
+}
+
+.auth-badge {
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.auth-required {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #ef4444;
+}
+
+.auth-public {
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    color: #22c55e;
+}
+
+.endpoint-desc {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+/* Method badges in inputs */
+.method-post {
+    color: #22c55e !important;
+    font-weight: 600;
+}
+
+.method-get {
+    color: #3b82f6 !important;
+    font-weight: 600;
+}
+
+.method-put {
+    color: #f59e0b !important;
+    font-weight: 600;
+}
+
+.method-delete {
+    color: #ef4444 !important;
+    font-weight: 600;
+}
+
+/* Auth Warning */
+.auth-warning {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+    color: #fca5a5;
+}
+
+.auth-warning a {
+    color: #6366f1;
+    text-decoration: underline;
+}
+
+.warning-icon {
+    font-size: 1rem;
+}
+
+/* Auth Modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-glass);
+    border-radius: 16px;
+    padding: 2rem;
+    max-width: 400px;
+    width: 90%;
+    transform: scale(0.9);
+    transition: transform 0.3s;
+}
+
+.modal-overlay.active .modal {
+    transform: scale(1);
+}
+
+.modal-title {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.modal-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.modal-tab {
+    flex: 1;
+    padding: 0.5rem;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-glass);
+    border-radius: 6px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.modal-tab.active {
+    background: var(--accent-primary);
+    color: white;
+    border-color: var(--accent-primary);
+}

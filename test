@@ -3,34 +3,34 @@
 ## Backend / API (Node.js/Express)
 
 ### Authentifizierung & Sicherheit
-- [ ] JWT-basierte Authentifizierung implementieren
+- [x] JWT-basierte Authentifizierung implementieren
 - [ ] OAuth2 Integration (Google, GitHub Login)
-- [ ] API-Key Management System für Entwickler
-- [ ] Rate Limiting pro User/API-Key (z.B. 1000 Requests/Std)
-- [ ] CORS Policy korrekt konfigurieren
-- [ ] Helmet.js für Sicherheits-Headers
-- [ ] Input Validation mit Joi oder Zod
+- [x] API-Key Management System für Entwickler
+- [x] Rate Limiting pro User/API-Key (z.B. 1000 Requests/Std)
+- [x] CORS Policy korrekt konfigurieren
+- [x] Helmet.js für Sicherheits-Headers
+- [x] Input Validation mit Joi oder Zod
 - [ ] SQL/NoSQL Injection Schutz
 - [ ] XSS Protection
 - [ ] Request Signing für interne APIs
 - [ ] IP Whitelisting für Admin-Endpunkte
 
 ### Datenbank & Persistenz
-- [ ] Von mockDB zu echter Datenbank migrieren (MongoDB/PostgreSQL)
-- [ ] Datenbank-Connection Pooling
+- [x] Von mockDB zu echter Datenbank migrieren (MongoDB/PostgreSQL)
+- [x] Datenbank-Connection Pooling
 - [ ] Redis Cache für häufige Abfragen
 - [ ] Database Migration System (z.B. Umzug.js)
 - [ ] Backup & Restore Strategie
-- [ ] Datenbank-Indizes optimieren
-- [ ] Soft Delete statt Hard Delete
+- [x] Datenbank-Indizes optimieren
+- [x] Soft Delete statt Hard Delete
 - [ ] Audit Logging für alle Datenänderungen
 - [ ] Data Encryption at Rest
 
 ### API Design & Standards
-- [ ] OpenAPI 3.0 / Swagger Dokumentation generieren
+- [x] OpenAPI 3.0 / Swagger Dokumentation generieren
 - [ ] API Versioning (v1, v2 in URL)
-- [ ] Consistent Error Response Format
-- [ ] HTTP Status Codes korrekt nutzen
+- [x] Consistent Error Response Format
+- [x] HTTP Status Codes korrekt nutzen
 - [ ] Pagination für alle List-Endpoints
 - [ ] Filtering, Sorting, Searching
 - [ ] HATEOAS Links in Responses
@@ -64,10 +64,10 @@
 - [ ] SonarQube für Code Quality
 
 ### Logging & Monitoring
-- [ ] Structured Logging mit Winston/Pino
+- [x] Structured Logging mit Winston/Pino
 - [ ] Zentralisiertes Log Management (ELK Stack)
 - [ ] Application Performance Monitoring (APM)
-- [ ] Health Check Endpoints (/health, /ready)
+- [x] Health Check Endpoints (/health, /ready)
 - [ ] Metrics Endpoints (Prometheus)
 - [ ] Alerting System (PagerDuty/Opsgenie)
 - [ ] Distributed Tracing (Jaeger/Zipkin)
