@@ -1,9 +1,31 @@
 import express from 'express';
 import Session from '../models/Session.js';
 import User from '../models/User.js';
-import { authenticate } from '../middleware/auth.js';
 import { validate } from '../middleware/validate.js';
 import Joi from 'joi';
+import mongoose from 'mongoose';
+
+// Mock user for non-authenticated mode
+const getMockUserId = () => 'demo_user_001';
+
+// Helper to get or create demo user
+async function getOrCreateDemoUser() {
+  let user = await User.findById(getMockUserId());
+  if (!user) {
+    user = await User.create({
+      _id: getMockUserId(),
+      email: 'demo@example.com',
+      password: 'demo',
+      firstName: 'Demo',
+      lastName: 'User',
+      grade: 9,
+      totalXP: 0,
+      level: 1,
+      streak: { current: 1, longest: 1, lastActive: new Date() }
+    });
+  }
+  return user;
+}
 
 const router = express.Router();
 
@@ -58,9 +80,9 @@ const logSessionSchema = Joi.object({
  *       201:
  *         description: Session logged successfully
  */
-router.post('/log-session', authenticate, validate(logSessionSchema), async (req, res) => {
+router.post('/log-session', validate(logSessionSchema), async (req, res) => {
   try {
-    const userId = req.userId;
+    const userId = req.userId || getMockUserId();
     const {
       duration,
       topicId,
@@ -74,14 +96,8 @@ router.post('/log-session', authenticate, validate(logSessionSchema), async (req
       learningPlanId
     } = req.body;
 
-    // Get user for streak calculation
-    const user = await User.findById(userId);
-    if (!user) {
-      return res.status(404).json({
-        success: false,
-        error: 'User not found'
-      });
-    }
+    // Get or create user for streak calculation
+    const user = await getOrCreateDemoUser();
 
     // Calculate XP
     const baseXP = Math.floor(duration * 0.8);
@@ -209,10 +225,10 @@ router.post('/log-session', authenticate, validate(logSessionSchema), async (req
  *       200:
  *         description: List of sessions
  */
-router.get('/sessions', authenticate, async (req, res) => {
+router.get('/sessions', async (req, res) => {
   try {
     const { limit = 50, subject } = req.query;
-    const query = { userId: req.userId };
+    const query = { userId: req.userId || getMockUserId() };
     
     if (subject) {
       query.subject = subject;
@@ -247,9 +263,9 @@ router.get('/sessions', authenticate, async (req, res) => {
  *       200:
  *         description: Progress statistics
  */
-router.get('/stats', authenticate, async (req, res) => {
+router.get('/stats', async (req, res) => {
   try {
-    const userId = req.userId;
+    const userId = req.userId || getMockUserId();
 
     // Get streak info
     const streakInfo = await Session.getStreakInfo(userId);
@@ -322,11 +338,11 @@ router.get('/stats', authenticate, async (req, res) => {
  *       200:
  *         description: Dashboard data
  */
-router.get('/dashboard', authenticate, async (req, res) => {
+router.get('/dashboard', async (req, res) => {
   try {
-    const userId = req.userId;
+    const userId = req.userId || getMockUserId();
 
-    const user = await User.findById(userId);
+    const user = await getOrCreateDemoUser();
     const streakInfo = await Session.getStreakInfo(userId);
     const todayStats = await Session.getDailyStats(userId, new Date());
 
@@ -354,7 +370,7 @@ router.get('/dashboard', authenticate, async (req, res) => {
       success: true,
       data: {
         user: {
-          name: user.fullName,
+          name: `${user.firstName} ${user.lastName}`,
           level: user.level,
           totalXP: user.totalXP,
           streak: streakInfo

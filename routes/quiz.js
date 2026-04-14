@@ -1,9 +1,11 @@
 import express from 'express';
 import Quiz from '../models/Quiz.js';
 import User from '../models/User.js';
-import { authenticate } from '../middleware/auth.js';
 import { validate } from '../middleware/validate.js';
 import Joi from 'joi';
+
+// Mock user for non-authenticated mode
+const getMockUserId = () => 'demo_user_001';
 
 const router = express.Router();
 
@@ -82,10 +84,10 @@ const questionTemplates = {
  *       201:
  *         description: Quiz generated successfully
  */
-router.post('/generate', authenticate, validate(generateSchema), async (req, res) => {
+router.post('/generate', validate(generateSchema), async (req, res) => {
   try {
     const { topicIds, difficulty, questionCount } = req.body;
-    const userId = req.userId;
+    const userId = req.userId || getMockUserId();
 
     // Generate questions
     const questions = [];
@@ -174,11 +176,11 @@ router.post('/generate', authenticate, validate(generateSchema), async (req, res
  *       200:
  *         description: Quiz started
  */
-router.post('/:id/start', authenticate, async (req, res) => {
+router.post('/:id/start', async (req, res) => {
   try {
     const quiz = await Quiz.findOne({
       _id: req.params.id,
-      userId: req.userId,
+      userId: req.userId || getMockUserId(),
       status: 'generated'
     });
 
@@ -236,10 +238,10 @@ router.post('/:id/start', authenticate, async (req, res) => {
  *       200:
  *         description: Quiz results
  */
-router.post('/submit', authenticate, validate(submitSchema), async (req, res) => {
+router.post('/submit', validate(submitSchema), async (req, res) => {
   try {
     const { quizId, answers } = req.body;
-    const userId = req.userId;
+    const userId = req.userId || getMockUserId();
 
     const quiz = await Quiz.findOne({
       _id: quizId,
@@ -257,19 +259,31 @@ router.post('/submit', authenticate, validate(submitSchema), async (req, res) =>
     // Submit answers
     const result = await quiz.submit(answers);
 
-    // Update user XP and stats
-    const user = await User.findById(userId);
-    if (user) {
-      user.totalXP += result.xpAwarded;
-      
-      // Level up check
-      const newLevel = Math.floor(user.totalXP / 300) + 1;
-      if (newLevel > user.level) {
-        user.level = newLevel;
-      }
-      
-      await user.save();
+    // Get or create mock user
+    let user = await User.findById(userId);
+    if (!user) {
+      user = await User.create({
+        _id: userId,
+        email: 'demo@example.com',
+        password: 'demo',
+        firstName: 'Demo',
+        lastName: 'User',
+        grade: 9,
+        totalXP: 0,
+        level: 1,
+        streak: { current: 1, longest: 1, lastActive: new Date() }
+      });
     }
+    
+    user.totalXP += result.xpAwarded;
+    
+    // Level up check
+    const newLevel = Math.floor(user.totalXP / 300) + 1;
+    if (newLevel > user.level) {
+      user.level = newLevel;
+    }
+    
+    await user.save();
 
     res.json({
       success: true,
@@ -302,10 +316,10 @@ router.post('/submit', authenticate, validate(submitSchema), async (req, res) =>
  *       200:
  *         description: List of completed quizzes
  */
-router.get('/history', authenticate, async (req, res) => {
+router.get('/history', async (req, res) => {
   try {
     const quizzes = await Quiz.find({
-      userId: req.userId,
+      userId: req.userId || getMockUserId(),
       status: 'completed'
     })
       .sort({ createdAt: -1 })

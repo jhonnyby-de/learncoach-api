@@ -1,10 +1,12 @@
 import express from 'express';
 import LearningPlan from '../models/LearningPlan.js';
 import User from '../models/User.js';
-import { authenticate } from '../middleware/auth.js';
 import { validate } from '../middleware/validate.js';
 import Joi from 'joi';
 import knowledgeDB from '../data/knowledge-database.js';
+
+// Mock user for non-authenticated mode
+const getMockUserId = () => 'demo_user_001';
 
 const router = express.Router();
 
@@ -59,7 +61,7 @@ const generatePlanSchema = Joi.object({
  *       400:
  *         description: Invalid input
  */
-router.post('/generate', authenticate, validate(generatePlanSchema), async (req, res) => {
+router.post('/generate', validate(generatePlanSchema), async (req, res) => {
   try {
     const {
       grade,
@@ -102,7 +104,7 @@ router.post('/generate', authenticate, validate(generatePlanSchema), async (req,
 
     // Create MongoDB document
     const planData = {
-      userId: req.userId,
+      userId: req.userId || getMockUserId(),
       grade,
       subjects: profile.subjects,
       targetNote: parseFloat(targetNote),
@@ -128,9 +130,8 @@ router.post('/generate', authenticate, validate(generatePlanSchema), async (req,
 
     const savedPlan = await LearningPlan.create(planData);
 
-    // Populate and return
-    const populatedPlan = await LearningPlan.findById(savedPlan._id)
-      .populate('userId', 'email name');
+    // Return the plan
+    const populatedPlan = await LearningPlan.findById(savedPlan._id);
 
     res.status(201).json({
       success: true,
@@ -160,9 +161,9 @@ router.post('/generate', authenticate, validate(generatePlanSchema), async (req,
  *       200:
  *         description: List of learning plans
  */
-router.get('/plans', authenticate, async (req, res) => {
+router.get('/plans', async (req, res) => {
   try {
-    const plans = await LearningPlan.find({ userId: req.userId, isActive: true })
+    const plans = await LearningPlan.find({ userId: req.userId || getMockUserId(), isActive: true })
       .sort({ createdAt: -1 })
       .select('-schedule'); // Exclude detailed schedule for list view
 
@@ -199,11 +200,11 @@ router.get('/plans', authenticate, async (req, res) => {
  *       404:
  *         description: Plan not found
  */
-router.get('/plans/:id', authenticate, async (req, res) => {
+router.get('/plans/:id', async (req, res) => {
   try {
     const plan = await LearningPlan.findOne({
       _id: req.params.id,
-      userId: req.userId,
+      userId: req.userId || getMockUserId(),
       isActive: true
     });
 
@@ -254,13 +255,13 @@ router.get('/plans/:id', authenticate, async (req, res) => {
  *       200:
  *         description: Session completed
  */
-router.post('/plans/:id/complete-session', authenticate, async (req, res) => {
+router.post('/plans/:id/complete-session', async (req, res) => {
   try {
     const { dayIndex, sessionIndex, score } = req.body;
 
     const plan = await LearningPlan.findOne({
       _id: req.params.id,
-      userId: req.userId
+      userId: req.userId || getMockUserId()
     });
 
     if (!plan) {
@@ -297,10 +298,10 @@ router.post('/plans/:id/complete-session', authenticate, async (req, res) => {
  *       200:
  *         description: Plan deleted
  */
-router.delete('/plans/:id', authenticate, async (req, res) => {
+router.delete('/plans/:id', async (req, res) => {
   try {
     const plan = await LearningPlan.findOneAndUpdate(
-      { _id: req.params.id, userId: req.userId },
+      { _id: req.params.id, userId: req.userId || getMockUserId() },
       { isActive: false, deletedAt: new Date() },
       { new: true }
     );

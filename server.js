@@ -81,6 +81,14 @@ app.use('/api/quiz', quizRoutes);
 app.use('/api/progress', progressRoutes);
 app.use('/api/knowledge', knowledgeRoutes);
 
+// Static files
+app.use(express.static('public'));
+
+// Main app route
+app.get('/app', (req, res) => {
+  res.sendFile('app.html', { root: 'public' });
+});
+
 // Health check endpoint
 app.get('/health', (req, res) => {
   res.json({
@@ -113,12 +121,18 @@ app.get('/ready', (req, res) => {
   }
 });
 
-// Root endpoint
+// Root endpoint - redirect to app
 app.get('/', (req, res) => {
+  res.redirect('/app');
+});
+
+// API info endpoint
+app.get('/api', (req, res) => {
   res.json({
     success: true,
-    message: 'Welcome to LearnCoach API',
+    message: 'LearnCoach API',
     version: '1.0.0',
+    app: '/app',
     documentation: '/api-docs',
     health: '/health'
   });
