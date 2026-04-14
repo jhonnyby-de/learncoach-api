@@ -4,6 +4,7 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import swaggerUi from 'swagger-ui-express';
 import dotenv from 'dotenv';
+import path from 'path';
 
 // Load environment variables
 dotenv.config();
@@ -86,7 +87,7 @@ app.use(express.static('public'));
 
 // Main app route
 app.get('/app', (req, res) => {
-  res.sendFile('app.html', { root: 'public' });
+  res.sendFile(path.join(process.cwd(), 'public', 'app.html'));
 });
 
 // Health check endpoint
